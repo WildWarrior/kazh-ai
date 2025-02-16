@@ -9,6 +9,17 @@ import plotly.express as px
 # Set page config for a wider layout
 st.set_page_config(layout="wide")
 
+# Custom CSS for the title
+st.markdown("""
+    <style>
+        .big-font {
+            font-size:3rem !important;
+            font-weight: bold;
+            color:#007bff;
+            margin-bottom: 1rem;
+        }
+    </style>
+""", unsafe_allow_html=True)
 # Add some styling
 st.markdown("""
     <style>
@@ -34,17 +45,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Custom CSS for the title
-st.markdown("""
-    <style>
-        .big-font {
-            font-size:3rem !important;
-            font-weight: bold;
-            color:#007bff;
-            margin-bottom: 1rem;
-        }
-    </style>
-""", unsafe_allow_html=True)
+
 
 st.markdown('<p class="big-font">ETRM Data Retrieval and Visualization Tool</p>', unsafe_allow_html=True)
 
