@@ -107,21 +107,21 @@ if st.session_state.query_result is not None:
     # Visualization options
     st.markdown("### Visualization Options")
     if len(df.columns) > 1:
-    x_axis = st.selectbox("Select X-axis", options=df.columns, key="x_axis")
-    y_axis = st.multiselect("Select Y-axis", options=df.columns, key="y_axis")
-    plot_type = st.selectbox("Select Plot Type", options=["Bar", "Line", "Scatter"], key="plot_type")
-
-    if st.button("Plot Chart"):
-        try:
-            if plot_type == "Bar":
-                fig = px.bar(df, x=x_axis, y=y_axis)
-            elif plot_type == "Line":
-                fig = px.line(df, x=x_axis, y=y_axis)
-            elif plot_type == "Scatter":
-                fig = px.scatter(df, x=x_axis, y=y_axis)
-            st.plotly_chart(fig)
-        except Exception as e:
-            st.error(f"Error while plotting: {e}")
+        x_axis = st.selectbox("Select X-axis", options=df.columns, key="x_axis")
+        y_axis = st.multiselect("Select Y-axis", options=df.columns, key="y_axis")
+        plot_type = st.selectbox("Select Plot Type", options=["Bar", "Line", "Scatter"], key="plot_type")
+    
+        if st.button("Plot Chart"):
+            try:
+                if plot_type == "Bar":
+                    fig = px.bar(df, x=x_axis, y=y_axis)
+                elif plot_type == "Line":
+                    fig = px.line(df, x=x_axis, y=y_axis)
+                elif plot_type == "Scatter":
+                    fig = px.scatter(df, x=x_axis, y=y_axis)
+                st.plotly_chart(fig)
+            except Exception as e:
+                st.error(f"Error while plotting: {e}")
 
     # Download Button
     csv = df.to_csv(index=False)
