@@ -11,6 +11,7 @@ st.set_page_config(layout="wide")
 
 
 # Add some styling
+# Add some styling
 st.markdown("""
     <style>
         .stApp {
@@ -34,18 +35,28 @@ st.markdown("""
           }
     </style>
 """, unsafe_allow_html=True)
-# Add user profile icon, tenant, and database info in header
+
+# Add user profile icon, tenant, and database info in header with dropdown
 st.markdown("""
-    <div style='display: flex; align-items: center; justify-content: space-between; padding: 10px;'>
-        <div>
+    <div style='position: relative; display: inline-block;'>
+        <div style='display: flex; align-items: center; cursor: pointer;'>
             <img src='https://www.freeiconspng.com/uploads/profile-icon-9.png' alt='User Profile' style='width: 40px; height: 40px; border-radius: 20px;'>
+            <span style='margin-left: 10px; font-weight: bold;'>User</span>
         </div>
-        <div style='display: flex; align-items: center;'>
-            <span style='margin-right: 20px; font-weight: bold;'>Tenant: DRW</span>
-            <span style='font-weight: bold;'>Database: Staging</span>
+        <div style='display: none; position: absolute; background-color: white; border: 1px solid #ccc; z-index: 1; padding: 10px;'>
+            <div>
+                <span style='font-weight: bold;'>Tenant: DRW</span><br>
+                <span style='font-weight: bold;'>Database: Staging</span>
+            </div>
         </div>
     </div>
-""", unsafe_allow_html=True)
+    <script>
+        const profileDiv = document.querySelector('div[style*="position: relative"]');
+        profileDiv.addEventListener('click', function() {
+            const dropdown = this.querySelector('div[style*="display: none"]');
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
 
 # Custom CSS for the title
 st.markdown("""
