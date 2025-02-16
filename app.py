@@ -137,7 +137,6 @@ st.markdown("""
         }
     </script>
 """, unsafe_allow_html=True)
-""", unsafe_allow_html=True)
 if st.button("Retrieve Data"):
     if not query:
         st.warning("Please enter a query.")
