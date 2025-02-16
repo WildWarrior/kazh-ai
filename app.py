@@ -8,7 +8,8 @@ import plotly.express as px
 
 # Set page config for a wider layout
 st.set_page_config(layout="wide")
-# Add icons for user tenant and DB (Prod, Staging)
+
+# Add icons for user tenant and DB (Prod, Staging) in the header
 st.markdown("### User Tenant and Database Icons")
 
 user_tenant_icon = "https://w7.pngwing.com/pngs/636/141/png-transparent-computer-icons-user-s-included-miscellaneous-user-profile-user.png"
@@ -33,6 +34,7 @@ with col3:
             <span style='font-size: 2rem; font-weight: bold; color: #007bff;'>Staging DB</span>
         </div>
     """, unsafe_allow_html=True)
+
 # Add some styling
 st.markdown("""
     <style>
@@ -127,7 +129,6 @@ if st.session_state.query_result is not None:
     st.markdown("### Query Results")
     st.dataframe(df) # Display dataframe
 
-    # Visualization options
     # Visualization options
     st.markdown("### Visualization Options")
     if len(df.columns) > 1:
