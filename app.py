@@ -123,7 +123,9 @@ st.markdown("""
                 recognition.lang = 'en-US';
                 recognition.start();
                 recognition.onresult = function(e) {
-                    document.getElementById('query_input').value = e.results[0][0].transcript;  # Updated to use the key
+                    // Use the key to set the value
+                    const queryInput = document.querySelector('textarea[data-baseweb="textarea"]');
+                    queryInput.value = e.results[0][0].transcript;
                     recognition.stop();
                 };
                 recognition.onerror = function(e) {
@@ -134,6 +136,7 @@ st.markdown("""
             }
         }
     </script>
+""", unsafe_allow_html=True)
 """, unsafe_allow_html=True)
 if st.button("Retrieve Data"):
     if not query:
