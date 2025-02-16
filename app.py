@@ -57,6 +57,7 @@ st.markdown("""
             dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
         });
     </script>
+""", unsafe_allow_html=True)
 
 # Custom CSS for the title
 st.markdown("""
