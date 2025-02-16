@@ -9,32 +9,6 @@ import plotly.express as px
 # Set page config for a wider layout
 st.set_page_config(layout="wide")
 
-# Add icons for user tenant and DB (Prod, Staging) in the header
-st.markdown("### User Tenant and Database Icons")
-
-user_tenant_icon = "https://w7.pngwing.com/pngs/636/141/png-transparent-computer-icons-user-s-included-miscellaneous-user-profile-user.png"
-
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.image(user_tenant_icon, caption="User Profile")
-with col2:
-    st.markdown("""
-        <div style='text-align: center;'>
-            <span style='font-size: 2rem; font-weight: bold; color: #007bff;'>Tenant</span>
-        </div>
-    """, unsafe_allow_html=True)
-with col3:
-    st.markdown("""
-        <div style='text-align: center;'>
-            <span style='font-size: 2rem; font-weight: bold; color: #007bff;'>Production DB</span>
-        </div>
-    """, unsafe_allow_html=True)
-    st.markdown("""
-        <div style='text-align: center;'>
-            <span style='font-size: 2rem; font-weight: bold; color: #007bff;'>Staging DB</span>
-        </div>
-    """, unsafe_allow_html=True)
-
 # Add some styling
 st.markdown("""
     <style>
