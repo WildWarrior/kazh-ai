@@ -107,9 +107,10 @@ def execute_query(query):
         return None
 
 # Input for the user query
-query = st.text_area("Enter your query:", height=150)
+query = st.text_area("Enter your query:", height=150, key="query_input")  # Added key for identification
 if 'query_result' not in st.session_state:
      st.session_state.query_result = None
+
 # Add voice to text functionality
 st.markdown("""
     <button onclick="startDictation()">🎤</button>
@@ -122,12 +123,14 @@ st.markdown("""
                 recognition.lang = 'en-US';
                 recognition.start();
                 recognition.onresult = function(e) {
-                    document.getElementById('query').value = e.results[0][0].transcript;
+                    document.getElementById('query_input').value = e.results[0][0].transcript;  # Updated to use the key
                     recognition.stop();
                 };
                 recognition.onerror = function(e) {
                     recognition.stop();
                 }
+            } else {
+                alert("Speech recognition not supported in this browser.");
             }
         }
     </script>
