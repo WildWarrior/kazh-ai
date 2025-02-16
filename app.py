@@ -6,7 +6,6 @@ from io import StringIO
 import base64
 import plotly.express as px
 
-
 # Set page config for a wider layout
 st.set_page_config(layout="wide")
 
@@ -35,7 +34,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-
 # Custom CSS for the title
 st.markdown("""
     <style>
@@ -52,13 +50,13 @@ st.markdown('<p class="big-font">ETRM Data Retrieval and Visualization Tool</p>'
 
 # Add user profile icon, tenant, and database info in header
 st.markdown("""
-    <div style='display: flex; align-items: center; justify-content: space-between;'>
+    <div style='display: flex; align-items: center; justify-content: space-between; padding: 10px;'>
         <div>
             <img src='https://www.freeiconspng.com/uploads/profile-icon-9.png' alt='User Profile' style='width: 40px; height: 40px; border-radius: 20px;'>
         </div>
-        <div>
-            <span style='margin-right: 20px;'>Tenant: DRW</span>
-            <span>Database: Staging</span>
+        <div style='display: flex; align-items: center;'>
+            <span style='margin-right: 20px; font-weight: bold;'>Tenant: DRW</span>
+            <span style='font-weight: bold;'>Database: Staging</span>
         </div>
     </div>
 """, unsafe_allow_html=True)
