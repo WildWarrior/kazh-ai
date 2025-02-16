@@ -48,6 +48,19 @@ st.markdown("""
 
 st.markdown('<p class="big-font">ETRM Data Retrieval and Visualization Tool</p>', unsafe_allow_html=True)
 
+# Add user profile icon, tenant, and database info in header
+st.markdown("""
+    <div style='display: flex; align-items: center; justify-content: space-between;'>
+        <div>
+            <img src='https://www.freeiconspng.com/uploads/profile-icon-9.png' alt='User Profile' style='width: 40px; height: 40px; border-radius: 20px;'>
+        </div>
+        <div>
+            <span style='margin-right: 20px;'>Tenant: DRW</span>
+            <span>Database: Staging</span>
+        </div>
+    </div>
+""", unsafe_allow_html=True)
+
 # Function to execute a query and return a pandas DataFrame
 @st.cache_data
 def execute_query(query):
