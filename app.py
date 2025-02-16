@@ -42,13 +42,14 @@ st.markdown("""
         <div style='display: flex; align-items: center; cursor: pointer;' onclick="toggleDropdown()">
             <img src='https://www.freeiconspng.com/uploads/profile-icon-9.png' alt='User Profile' style='width: 40px; height: 40px; border-radius: 20px;'>
             <span style='margin-left: 10px; font-weight: bold;'>User</span>
-        </div>
-       <div style='display: none; position: absolute; background-color: white; border: 1px solid #ccc; z-index: 1; padding: 10px;'>
+            <div style='display: none; position: absolute; background-color: white; border: 1px solid #ccc; z-index: 1; padding: 10px;'>
             <div>
                 <span style='font-weight: bold;'>Tenant: DRW</span><br>
                 <span style='font-weight: bold;'>Database: Staging</span>
             </div>
         </div>
+        </div>
+       
     </div>
 """, unsafe_allow_html=True)
 
