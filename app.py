@@ -53,7 +53,7 @@ st.markdown("""
     <script>
         function toggleDropdown() {
             const dropdown = document.getElementById('dropdown');
-            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
     </script>
 """, unsafe_allow_html=True)
