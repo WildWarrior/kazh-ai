@@ -105,8 +105,8 @@ if st.session_state.query_result is not None:
 
     # Visualization options
     # Visualization options
-st.markdown("### Visualization Options")
-if len(df.columns) > 1:
+    st.markdown("### Visualization Options")
+    if len(df.columns) > 1:
     x_axis = st.selectbox("Select X-axis", options=df.columns, key="x_axis")
     y_axis = st.multiselect("Select Y-axis", options=df.columns, key="y_axis")
     plot_type = st.selectbox("Select Plot Type", options=["Bar", "Line", "Scatter"], key="plot_type")
