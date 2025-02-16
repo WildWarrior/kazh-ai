@@ -6,9 +6,6 @@ from io import StringIO
 import base64
 import plotly.express as px
 
-# Set page config for a wider layout
-st.set_page_config(layout="wide")
-
 # Add some styling
 st.markdown("""
     <style>
@@ -33,6 +30,10 @@ st.markdown("""
           }
     </style>
 """, unsafe_allow_html=True)
+# Set page config for a wider layout
+st.set_page_config(layout="wide")
+
+
 
 # Custom CSS for the title
 st.markdown("""
