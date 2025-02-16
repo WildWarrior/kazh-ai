@@ -110,7 +110,28 @@ def execute_query(query):
 query = st.text_area("Enter your query:", height=150)
 if 'query_result' not in st.session_state:
      st.session_state.query_result = None
-
+# Add voice to text functionality
+st.markdown("""
+    <button onclick="startDictation()">🎤</button>
+    <script>
+        function startDictation() {
+            if (window.hasOwnProperty('webkitSpeechRecognition')) {
+                var recognition = new webkitSpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+                recognition.start();
+                recognition.onresult = function(e) {
+                    document.getElementById('query').value = e.results[0][0].transcript;
+                    recognition.stop();
+                };
+                recognition.onerror = function(e) {
+                    recognition.stop();
+                }
+            }
+        }
+    </script>
+""", unsafe_allow_html=True)
 if st.button("Retrieve Data"):
     if not query:
         st.warning("Please enter a query.")
