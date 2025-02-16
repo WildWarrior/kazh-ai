@@ -39,11 +39,11 @@ st.markdown("""
 # Add user profile icon, tenant, and database info in header with dropdown
 st.markdown("""
     <div style='position: relative; display: inline-block;'>
-        <div style='display: flex; align-items: center; cursor: pointer;'>
+        <div style='display: flex; align-items: center; cursor: pointer;' onclick="toggleDropdown()">
             <img src='https://www.freeiconspng.com/uploads/profile-icon-9.png' alt='User Profile' style='width: 40px; height: 40px; border-radius: 20px;'>
             <span style='margin-left: 10px; font-weight: bold;'>User</span>
         </div>
-        <div style='display: none; position: absolute; background-color: white; border: 1px solid #ccc; z-index: 1; padding: 10px;'>
+        <div id="dropdown" style='display: none; position: absolute; background-color: white; border: 1px solid #ccc; z-index: 1; padding: 10px;'>
             <div>
                 <span style='font-weight: bold;'>Tenant: DRW</span><br>
                 <span style='font-weight: bold;'>Database: Staging</span>
@@ -51,11 +51,10 @@ st.markdown("""
         </div>
     </div>
     <script>
-        const profileDiv = document.querySelector('div[style*="position: relative"]');
-        profileDiv.addEventListener('click', function() {
-            const dropdown = this.querySelector('div[style*="display: none"]');
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdown');
             dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-        });
+        }
     </script>
 """, unsafe_allow_html=True)
 
