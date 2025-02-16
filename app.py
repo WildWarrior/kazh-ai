@@ -50,12 +50,6 @@ st.markdown("""
             </div>
         </div>
     </div>
-    <script>
-        function toggleDropdown() {
-            const dropdown = document.getElementById('dropdown');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-    </script>
 """, unsafe_allow_html=True)
 
 # Custom CSS for the title
