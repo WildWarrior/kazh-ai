@@ -8,15 +8,46 @@ import plotly.express as px
 
 # Set page config for a wider layout
 st.set_page_config(layout="wide")
+# Add icons for user tenant and DB (Prod, Staging)
 
+user_tenant_icon = """
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/>
+        <path d="M12 14c-4.41 0-8 2.69-8 6v2h16v-2c0-3.31-3.59-6-8-6z"/>
+    </svg>
+"""
+
+# Updated layout to align items horizontally
+st.markdown(""" 
+    <div style='display: flex; align-items: center; justify-content: center; margin-bottom: 100px;'>
+        <div style='text-align: center; margin-right: 10px;'>
+            <span style='font-size: 1rem; font-weight: bold; color: #007bff;'>Tenant</span>
+        </div>
+        <div style='text-align: center; margin-right: 20px;'>
+            <select style='font-size: 1rem; background-color: white; color: black;'>
+                <option value="DRW">DRW</option>
+                <!-- Add more options here if needed -->
+            </select>
+        </div>
+        <div style='text-align: center;'>
+            <span style='font-size: 1rem; font-weight: bold; color: #007bff; margin-right: 10px;'>Database</span>
+        </div>
+        <div style='text-align: center; margin-right: 20px;'>
+            <select style='font-size: 1rem; background-color: white; color: black;'>
+                <option value="DRW">Endur092_Staging</option>
+                <!-- Add more options here if needed -->
+            </select>
+        </div>
+    </div>
+""".format(icon=user_tenant_icon), unsafe_allow_html=True)
 
 # Add some styling
-# Add some styling
-st.markdown("""
+st.markdown(""" 
     <style>
         .stApp {
             max-width: 100%;
             padding: 2rem;
+            # background-color: #000000;  /* Changed background color to white */
         }
         .stTextInput > div > div > input {
             background-color: #f8f9fa;
@@ -33,24 +64,11 @@ st.markdown("""
          .stSelectbox > div > div > div > input {
              background-color:#f8f9fa;
           }
+        .stSelectbox > div > label,
+        .stMultiSelect > div > label {
+            color: black; /* Set label color to black */
+        }
     </style>
-""", unsafe_allow_html=True)
-
-# Add user profile icon, tenant, and database info in header with dropdown
-st.markdown("""
-    <div style='position: relative; display: inline-block;'>
-        <div style='display: flex; align-items: center; cursor: pointer;' onclick="toggleDropdown()">
-            <img src='https://www.freeiconspng.com/uploads/profile-icon-9.png' alt='User Profile' style='width: 40px; height: 40px; border-radius: 20px;'>
-            <span style='margin-left: 10px; font-weight: bold;'>User</span>
-            <div style='display: none; position: absolute; background-color: white; border: 1px solid #ccc; z-index: 1; padding: 10px;'>
-            <div>
-                <span style='font-weight: bold;'>Tenant: DRW</span><br>
-                <span style='font-weight: bold;'>Database: Staging</span>
-            </div>
-        </div>
-        </div>
-       
-    </div>
 """, unsafe_allow_html=True)
 
 # Custom CSS for the title
@@ -64,9 +82,8 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+
 st.markdown('<p class="big-font">ETRM Data Retrieval and Visualization Tool</p>', unsafe_allow_html=True)
-
-
 
 # Function to execute a query and return a pandas DataFrame
 @st.cache_data
@@ -107,36 +124,10 @@ def execute_query(query):
         return None
 
 # Input for the user query
-query = st.text_area("Enter your query:", height=150, key="query_input")  # Added key for identification
+query = st.text_area("Enter your query:", height=150)
 if 'query_result' not in st.session_state:
      st.session_state.query_result = None
 
-# Add voice to text functionality
-st.markdown("""
-    <button onclick="startDictation()">🎤</button>
-    <script>
-        function startDictation() {
-            if (window.hasOwnProperty('webkitSpeechRecognition')) {
-                var recognition = new webkitSpeechRecognition();
-                recognition.continuous = false;
-                recognition.interimResults = false;
-                recognition.lang = 'en-US';
-                recognition.start();
-                recognition.onresult = function(e) {
-                    // Use the key to set the value
-                    const queryInput = document.querySelector('textarea[data-baseweb="textarea"]');
-                    queryInput.value = e.results[0][0].transcript;
-                    recognition.stop();
-                };
-                recognition.onerror = function(e) {
-                    recognition.stop();
-                }
-            } else {
-                alert("Speech recognition not supported in this browser.");
-            }
-        }
-    </script>
-""", unsafe_allow_html=True)
 if st.button("Retrieve Data"):
     if not query:
         st.warning("Please enter a query.")
@@ -150,11 +141,16 @@ if st.session_state.query_result is not None:
     st.dataframe(df) # Display dataframe
 
     # Visualization options
-    st.markdown("### Visualization Options")
+    st.markdown("<span style='color: #007bff; font-size: 2rem; font-weight: bold;'>Visualization Options</span>", unsafe_allow_html=True)
     if len(df.columns) > 1:
         x_axis = st.selectbox("Select X-axis", options=df.columns, key="x_axis")
         y_axis = st.multiselect("Select Y-axis", options=df.columns, key="y_axis")
-        plot_type = st.selectbox("Select Plot Type", options=["Bar", "Line", "Scatter"], key="plot_type")
+         # Check if y_axis has at least one selection to show z_axis
+        if y_axis:
+            z_axis = st.selectbox("Select Z-axis", options=df.columns, key="z_axis")
+        else:
+            z_axis = None
+        plot_type = st.selectbox("Select Plot Type", options=["Bar", "Line", "Scatter", "3D Mesh"], key="plot_type")
     
         if st.button("Plot Chart"):
             try:
@@ -164,6 +160,8 @@ if st.session_state.query_result is not None:
                     fig = px.line(df, x=x_axis, y=y_axis)
                 elif plot_type == "Scatter":
                     fig = px.scatter(df, x=x_axis, y=y_axis)
+                elif plot_type == "3D Mesh":
+                    fig = px.scatter_3d(df, x=x_axis, y=y_axis, z=z_axis)  # 3D Mesh plot
                 st.plotly_chart(fig)
             except Exception as e:
                 st.error(f"Error while plotting: {e}")
